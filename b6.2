@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<style>
+
+        body {
+
+            margin: 20px;
+
+            font-family: Arial, sans-serif;
+
+        }
+
+        table {
+
+            border-collapse: collapse;
+
+            margin-bottom: 20px;
+
+        }
+
+        td {
+
+            padding: 5px 10px;
+
+            vertical-align: middle;
+
+        }
+
+        input[type="text"] {
+
+            width: 50px;
+
+            text-align: center;
+
+        }
+
+        .label {
+
+            font-weight: bold;
+
+            width: 100px;
+
+        }
+
+        .result {
+
+            color: blue;
+            font-weight: bold;
+
+        }
+
+        button {
+
+            padding: 8px 12px;
+
+            margin-right: 10px;
+
+            cursor: pointer;
+
+        }
+
+        button:hover {
+
+            opacity: 0.9;
+
+        }
+
+
+        .color-btn {
+
+            background-color: #4CAF50; /* Xanh lá */
+
+            color: #fff;
+
+            border: none;
+
+            border-radius: 5px;
+
+        }
+
+        .color-btn:hover {
+
+            background-color: #45a049;
+
+        }
+
+
+        .calc-btn {
+
+            background-color: #ff9800; /* Cam */
+
+            color: #fff;
+
+            border: none;
+
+            border-radius: 5px;
+
+        }
+
+        .calc-btn:hover {
+
+            background-color: #e68900;
+
+        }
+
+        #recentOperations {
+
+            font-style: italic;
+
+            margin-top: 10px;
+
+            color: #444;
+
+        }
+</style>
+</head>
+<body>
+<h2>Thực hiện phép tính và đổi màu nội dung</h2>
+<table border="1">
+<tr>
+<td class="label">Phép cộng</td>
+<td>
+<input type="text" id="addA" value="3">
+
+            +
+<input type="text" id="addB" value="5">
+
+            =
+<span class="result" id="addResult">?</span>
+</td>
+</tr>
+<tr>
+<td class="label">Phép trừ</td>
+<td>
+<input type="text" id="subA" value="3">
+
+            -
+<input type="text" id="subB" value="4">
+
+            =
+<span class="result" id="subResult">?</span>
+</td>
+</tr>
+<tr>
+<td class="label">Phép nhân</td>
+<td>
+<input type="text" id="mulA" value="2">
+
+            ×
+<input type="text" id="mulB" value="3">
+
+            =
+<span class="result" id="mulResult">?</span>
+</td>
+</tr>
+<tr>
+<td class="label">Phép chia</td>
+<td>
+<input type="text" id="divA" value="9">
+
+            ÷
+<input type="text" id="divB" value="1">
+
+            =
+<span class="result" id="divResult">?</span>
+</td>
+</tr>
+</table>
+<button class="calc-btn" onclick="calculateAll()">Tính tất cả</button>
+<button class="color-btn" onclick="changeResultsColor()">Đổi màu kết quả</button>
+<!-- Hiển thị nội dung về các phép toán đã thực hiện -->
+<div id="recentOperations">Chưa thực hiện phép toán nào</div>
+<script>
+
+    function isNumber(value) {
+
+        return !isNaN(value) && value.trim() !== "";
+
+    }
+
+    function calculateAll() {
+        const addA = document.getElementById("addA").value;
+
+        const addB = document.getElementById("addB").value;
+
+        const subA = document.getElementById("subA").value;
+
+        const subB = document.getElementById("subB").value;
+
+        const mulA = document.getElementById("mulA").value;
+
+        const mulB = document.getElementById("mulB").value;
+
+        const divA = document.getElementById("divA").value;
+
+        const divB = document.getElementById("divB").value;
+
+        let addRes = "Lỗi";
+
+        let subRes = "Lỗi";
+
+        let mulRes = "Lỗi";
+
+        let divRes = "Lỗi";
+
+        // Phép cộng
+
+        if (isNumber(addA) && isNumber(addB)) {
+
+            addRes = parseFloat(addA) + parseFloat(addB);
+
+        }
+
+        if (isNumber(subA) && isNumber(subB)) {
+
+            subRes = parseFloat(subA) - parseFloat(subB);
+
+        }
+
+        if (isNumber(mulA) && isNumber(mulB)) {
+
+            mulRes = parseFloat(mulA) * parseFloat(mulB);
+
+        }
+        if (isNumber(divA) && isNumber(divB)) {
+            if (parseFloat(divB) === 0) {
+
+                divRes = "Không thể chia 0";
+
+            } else {
+
+                divRes = parseFloat(divA) / parseFloat(divB);
+
+            }
+
+        }
+
+        document.getElementById("addResult").textContent = addRes;
+
+        document.getElementById("subResult").textContent = subRes;
+
+        document.getElementById("mulResult").textContent = mulRes;
+
+        document.getElementById("divResult").textContent = divRes;
+
+        const recentOps = `
+<strong>Các phép toán vừa thực hiện:</strong><br>
+
+            Phép cộng: ${addA} + ${addB} = ${addRes}<br>
+
+            Phép trừ: ${subA} - ${subB} = ${subRes}<br>
+
+            Phép nhân: ${mulA} × ${mulB} = ${mulRes}<br>
+
+            Phép chia: ${divA} ÷ ${divB} = ${divRes}
+
+        `;
+
+        document.getElementById("recentOperations").innerHTML = recentOps;
+
+    }
+    function changeResultsColor() {
+
+        const resultElements = document.getElementsByClassName("result");
+        const colors = ["blue", "green", "red", "orange", "purple"];
+
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+        for (let i = 0; i < resultElements.length; i++) {
+
+            resultElements[i].style.color = randomColor;
+
+        }
+
+    }
+</script>
+</body>
+</html> 

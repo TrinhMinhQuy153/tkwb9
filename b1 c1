@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World - Cách 1</title>
+</head>
+<body>
+  <script>
+    document.write("hello world<br>");
+  </script>
+
+  <script>
+    alert("hello world");
+  </script>
+</body>
+</html>

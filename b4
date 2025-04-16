@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Form Đăng Ký</title>
+<style>
+       body {
+           font-family: Arial, sans-serif;
+           margin: 20px;
+       }
+       label {
+           display: inline-block;
+           width: 120px;
+           margin-bottom: 10px;
+       }
+       input[type="text"],
+       select {
+           padding: 5px;
+           width: 200px;
+           margin-bottom: 10px;
+       }
+       .row {
+           margin-bottom: 10px;
+       }
+       .checkbox-group {
+           display: flex;
+           flex-wrap: wrap;
+           gap: 10px;
+           margin-bottom: 10px;
+       }
+</style>
+<script>
+       function validateForm() {
+           let ho = document.getElementById("ho").value.trim();
+           let ten = document.getElementById("ten").value.trim();
+           let sdt = document.getElementById("sdt").value.trim();
+           if (ho === "") {
+               alert("Vui lòng nhập Họ.");
+               return false;
+           }
+           if (ten === "") {
+               alert("Vui lòng nhập Tên.");
+               return false;
+           }
+           if (sdt === "") {
+               alert("Vui lòng nhập Số điện thoại.");
+               return false;
+           }
+           if (isNaN(sdt)) {
+               alert("Số điện thoại phải là chữ số.");
+               return false;
+           }
+           if (sdt.length !== 10) {
+               alert("Số điện thoại phải có đúng 10 chữ số.");
+               return false;
+           }
+           return true;
+       }
+</script>
+</head>
+<body>
+<h2>Form Đăng Ký</h2>
+<form onsubmit="return validateForm()">
+<div class="row">
+<label for="ho">Họ:</label>
+<input type="text" id="ho" name="ho" />
+</div>
+<div class="row">
+<label for="ten">Tên:</label>
+<input type="text" id="ten" name="ten" />
+</div>
+<div class="row">
+<label for="ngaySinh">Ngày sinh:</label>
+<select id="ngaySinh" name="ngaySinh">
+<option value="">Ngày</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<!-- ... -->
+</select>
+<select id="thangSinh" name="thangSinh">
+<option value="">Tháng</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<!-- ... -->
+</select>
+<select id="namSinh" name="namSinh">
+<option value="">Năm</option>
+<option value="1980">1980</option>
+<option value="1981">1981</option>
+<!-- ... -->
+</select>
+</div>
+<div class="row">
+<label>Giới tính:</label>
+<input type="radio" id="gioiTinhNam" name="gioiTinh" value="Nam" />
+<label for="gioiTinhNam">Nam</label>
+<input type="radio" id="gioiTinhNu" name="gioiTinh" value="Nữ" />
+<label for="gioiTinhNu">Nữ</label>
+</div>
+<div class="row">
+<label for="sdt">Số điện thoại:</label>
+<input type="text" id="sdt" name="sdt" />
+</div>
+<div class="row">
+<label>Sở thích:</label>
+<div class="checkbox-group">
+<label><input type="checkbox" name="soThich" value="Đọc sách" /> Đọc sách</label>
+<label><input type="checkbox" name="soThich" value="Xem phim" /> Xem phim</label>
+<label><input type="checkbox" name="soThich" value="Nghe nhạc" /> Nghe nhạc</label>
+<label><input type="checkbox" name="soThich" value="Đá bóng" /> Đá bóng</label>
+</div>
+</div>
+<div class="row">
+<label for="khac">Khác:</label>
+<input type="text" id="khac" name="khac" />
+</div>
+<div class="row">
+<input type="submit" value="Submit" />
+<input type="reset" value="Reset" />
+</div>
+</form>
+</body>
+</html>
